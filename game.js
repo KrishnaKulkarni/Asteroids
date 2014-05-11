@@ -1,13 +1,11 @@
 (function (root){
    var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-
    //Should asteroid take pos, vel as parameters?
    var Game = Asteroids.Game = function (ctx){
      this.ctx = ctx;
 
-
-     numAsteroids = 10; //Change later
+     numAsteroids = 0; //Change later
      this.asteroids = this.addAsteroids(numAsteroids);
 
      this.ship = new Asteroids.Ship([Game.DIM_X / 2, Game.DIM_Y / 2], [0,0]);
@@ -73,9 +71,9 @@
 
     key('up', function(){ game.ship.power([0, -0.25]); });
 
-    key('right', function(){  game.ship.power([0.25, 0]); });
+    key('right', function(){  game.ship.rotateRight(); });
 
-    key('left', function(){ game.ship.power([-0.25, 0]); });
+    key('left', function(){ game.ship.rotateLeft(); });
     //key('b', game.ship.power([0, 0.25]));
     key('space', function(){ game.fireBullet(); });
 

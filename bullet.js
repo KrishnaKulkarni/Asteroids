@@ -5,12 +5,11 @@
    var Bullet = Asteroids.Bullet = function (dir, position){
 
      //this.vel --> the same vel that the ship is usingg
-
     var bVel = [Bullet.normalizeDir(dir)[0]*Bullet.SPEED,
       Bullet.normalizeDir(dir)[1]*Bullet.SPEED];
 
     Asteroids.MovingObject.call(this, position,
-       bVel, Bullet.RADIUS, Bullet.COLOR);
+       bVel, Bullet.RADIUS, Bullet.COLOR, Bullet.STROKE);
     };
 
    Bullet.normalizeDir = function(direction){
@@ -24,6 +23,7 @@
    Bullet.RADIUS = 2;
    Bullet.COLOR = "red";
    Bullet.SPEED = 8;
+	 Bullet.STROKE = "transparent";
 
    Bullet.inherits(Asteroids.MovingObject);
 

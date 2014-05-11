@@ -1,11 +1,12 @@
 (function (root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var MovingObject = Asteroids.MovingObject = function (pos, vel, rad, col){
+  var MovingObject = Asteroids.MovingObject = function (pos, vel, rad, col, stroke){
     this.pos = pos;
     this.vel = vel;
     this.rad = rad;
     this.col = col;
+		this.stroke = stroke || "#fff"
   };
   //
 
@@ -23,9 +24,8 @@
     // draw circle w/ circle_radius = this.rad
     // and circle_position = this.pos
     ctx.fillStyle = this.col;
-    ctx.beginPath(); // What does this do?
-
-
+		ctx.strokeStyle = this.stroke
+    ctx.beginPath();
     ctx.arc(
       this.pos[0],
       this.pos[1],
@@ -34,7 +34,9 @@
       2 * Math.PI,
       false
     );
-    ctx.fill();
+		ctx.fill();
+		ctx.lineWidth = 1;
+    ctx.stroke();
   };
 
 

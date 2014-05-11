@@ -3,9 +3,14 @@
 <head>
     <title>Asteroids!</title>
     <style>
-    canvas {
-      border: 10px solid #ccc;
-    }
+	    canvas {
+	      border: 1px solid #ccc;
+				background-image: url(http://fc01.deviantart.net/fs71/f/2012/160/b/9/stars_by_paulinemoss-d52un4e.jpg);
+/*		background: blue;*/
+				background-size: 800px 600px;
+				margin: 70px 200px;
+				color: #fff;
+			}
     </style>
 
     <script src="keymaster.js"></script>
@@ -15,13 +20,43 @@
     <script src="bullet.js"></script>
     <script src="ship.js"></script>
     <script src="game.js"></script>
+   
+</head>
+<body>
     <canvas width="800" height="600"></canvas>
 
     <script>
-        // var canvas = document.getElementsByTagName("canvas")[0];
         var canvas = document.getElementsByTagName("canvas")[0];
         var ctx = canvas.getContext("2d");
-        // ctx.fillStyle = "black";
+
+				ctx.fillStyle = '#ccddff';
+				ctx.beginPath();
+				ctx.moveTo(50,20);
+				ctx.lineTo(200,50);
+				ctx.lineTo(127,58);
+				ctx.closePath();
+				ctx.fill();
+				ctx.strokeStyle = 'rgb(0,128,0)';
+				ctx.lineWidth = 5;
+				ctx.stroke();
+
+
+				ctx.fillStyle = "transparent";
+				ctx.beginPath();
+				ctx.moveTo(210, 210)
+				ctx.lineTo(222, 210);
+				ctx.lineTo(216, 180);
+				ctx.closePath();
+				ctx.fill();
+				ctx.strokeStyle = "#fff";
+				ctx.lineWidth = 1;
+				ctx.stroke(); 
+				
+				
+				ctx.fillStyle = "white";
+				ctx.font = 40+"pt Andale Mono ";
+				ctx.fillText("Asteroids", 260,100);
+				
         // ctx.beginPath(); // What does this do?
         //
         //
@@ -34,11 +69,8 @@
         //   false
         // );
         // ctx.fill();
-        var asteroidsGame = new Asteroids.Game(canvas.getContext("2d"));
+        var asteroidsGame = new Asteroids.Game(ctx);
         asteroidsGame.start();
     </script>
-</head>
-<body>
-
 </body>
 </html>

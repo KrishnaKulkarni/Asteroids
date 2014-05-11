@@ -16,7 +16,7 @@
 
     Asteroid.inherits(Asteroids.MovingObject); //Do we need Asteroids.MovingObject vs. just MovingObject
     Asteroid.RADIUS = 30;
-    Asteroid.COLOR = "black";
+    Asteroid.COLOR = "transparent";
 
     Asteroid.randomAsteroid = function(dimX, dimY){
       var y = Math.random() * dimY;
