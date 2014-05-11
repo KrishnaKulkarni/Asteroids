@@ -7,20 +7,35 @@
 		this.angle = 0;
     };
 
-   Ship.RADIUS = 15;
+		
+	 
+   Ship.RADIUS = 12;
    Ship.COLOR = "transparent";
 
    Ship.inherits(Asteroids.MovingObject);
 
+	 Ship.prototype.direction = function(){
+		 return ([ parseFloat(Math.sin(this.angle).toFixed(2)),
+		 -1 * parseFloat(Math.cos(this.angle).toFixed(2))]);
+	 };
+
    Ship.prototype.power = function(impulse){
-     this.vel[0] += impulse[0];
-     this.vel[1] += impulse[1];
+		 var dir = this.direction();
+     this.vel[0] += (impulse[0] * dir[0]);
+     this.vel[1] += (impulse[1] * dir[1]);
    };
+	 
+	 Ship.prototype.decelerate = function(brake){
+		 // var dir = this.direction();
+     this.vel[0] *= brake;
+		 // if(this.vel[0] < 0) this.vel[0] = 0;
+     this.vel[1] *= brake;
+		 // if(this.vel[1] < 0) this.vel[1] = 0;
+	 };
 
    Ship.prototype.fireBullet = function(){
 		 
-		 var bulletDir = [ parseFloat(Math.sin(this.angle).toFixed(2)),
-		 -1 * parseFloat(Math.cos(this.angle).toFixed(2))];
+		 var bulletDir = this.direction();
 		 var bulletPos = this.pos.slice(0);
 		 bulletPos[0] += (13 * bulletDir[0]);
 		 bulletPos[1] += (13 * bulletDir[1]);
@@ -53,12 +68,12 @@
    };
 	 
 	 Ship.prototype.rotateRight = function(){
-		 this.angle += (Math.PI / 32);
+		 this.angle += (Math.PI / 16);
 		 this.angle %= (Math.PI * 2);
 	 }
 	 
 	 Ship.prototype.rotateLeft = function(){
-		 this.angle -= (Math.PI / 32);
+		 this.angle -= (Math.PI / 16);
 		 this.angle += (Math.PI * 2);
 		 this.angle %= (Math.PI * 2);
 	 }
