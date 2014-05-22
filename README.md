@@ -9,9 +9,8 @@ Live version: http://htmlpreview.github.io/?https://github.com/KrishnaKulkarni/A
 
 Features on the Horizon
 -----------------------
-- Welcome Screen + Instructions
 - Sound
 - Scores-Tracking / High Score
 - Animations for the power and brake actions
-- Asteroids break into smaller asteroids
 - Asteroids have polygonal shape
+- Pause button

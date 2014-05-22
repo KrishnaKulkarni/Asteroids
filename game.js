@@ -5,7 +5,7 @@
    var Game = Asteroids.Game = function (ctx){
      this.ctx = ctx;
 
-     numAsteroids = 10; //Change later
+     numAsteroids = 8; //Change later
      this.asteroids = [];
 		 this.addAsteroids(numAsteroids);
 
@@ -19,7 +19,8 @@
 
    Game.prototype.addAsteroids = function(numAsteroids) {
      for(var i = 0; i < numAsteroids; i++){
-      this.asteroids.push(Asteroids.Asteroid.randomAsteroid(Game.DIM_X, Game.DIM_Y));
+      this.asteroids.push(
+				Asteroids.Asteroid.randomAsteroid(Game.DIM_X, Game.DIM_Y, null, null, 'big'));
      };
    };
 
@@ -74,13 +75,22 @@
     //console.log(this.ctx);
     var game = this;
     //game.draw();
-    key('down', function(){  game.ship.decelerate(0.98); });
+    // key('down', function(){  game.ship.decelerate(0.98); });
+    // key('s', function(){  game.ship.decelerate(0.98); });
+    key('down', function(){  game.ship.reverse([0.1, 0.1]); });
+    key('s', function(){  game.ship.reverse([0.1, 0.1]); });
 
     key('up', function(){ game.ship.power([0.35, 0.35]); });
+    key('w', function(){ game.ship.power([0.35, 0.35]); });
+		
 
     key('right', function(){  game.ship.rotateRight(); });
+    key('d', function(){  game.ship.rotateRight(); });
+		
 
     key('left', function(){ game.ship.rotateLeft(); });
+    key('a', function(){ game.ship.rotateLeft(); });
+		
     //key('b', game.ship.power([0, 0.25]));
     key('space', function(){ game.fireBullet(); });
 
@@ -152,6 +162,18 @@
       if(idx === -1){
          updatedAsteroids.push(asteroid);
       }
+			else if(asteroid.size === 'big') {
+	      var frag1 = Asteroids.Asteroid.randomAsteroid(null, null, asteroid.pos[0], asteroid.pos[1], 'medium');
+	      var frag2 = Asteroids.Asteroid.randomAsteroid(null, null, asteroid.pos[0], asteroid.pos[1], 'medium');
+				
+				updatedAsteroids.push(frag1, frag2);
+			}
+			else if(asteroid.size === 'medium') {
+	      var frag1 = Asteroids.Asteroid.randomAsteroid(null, null, asteroid.pos[0], asteroid.pos[1], 'small');
+	      var frag2 = Asteroids.Asteroid.randomAsteroid(null, null, asteroid.pos[0], asteroid.pos[1], 'small');
+				
+				updatedAsteroids.push(frag1, frag2);
+			}
     }
     this.asteroids = updatedAsteroids;
   };

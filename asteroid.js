@@ -1,30 +1,27 @@
-//
-// Function.prototype.inherits = function (BaseClass) {
-//   function Surrogate () {};
-//   Surrogate.prototype = BaseClass.prototype;
-//   this.prototype = new Surrogate();
-// };
-//
-//requires Moving object
 (function (root){
    var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-   //Should asteroid take pos, vel as parameters?
-   var Asteroid = Asteroids.Asteroid = function (pos, vel){
-    Asteroids.MovingObject.call(this, pos, vel, Asteroid.RADIUS, Asteroid.COLOR);
+   var Asteroid = Asteroids.Asteroid = function (pos, vel, size){
+		this.size = size;
+    Asteroids.MovingObject.call(this, pos, vel, Asteroid.RADIUS[size], Asteroid.COLOR);
    };
 
     Asteroid.inherits(Asteroids.MovingObject); //Do we need Asteroids.MovingObject vs. just MovingObject
-    Asteroid.RADIUS = 30;
+    // Asteroid.RADIUS = 30;
+		Asteroid.RADIUS = {
+			'big' : 35,
+			'medium' : 24,
+			'small' : 12
+		}
     Asteroid.COLOR = "transparent";
+		Asteroid.SIZES = ['big', 'medium', 'small']
 
-    Asteroid.randomAsteroid = function(dimX, dimY){
-      var y = Math.random() * dimY;
-      var x = Math.random() * dimX;
-     // var y = 250;
-    //  var x = 250;
+    Asteroid.randomAsteroid = function(dimX, dimY, posX, posY, size){
+      var y = posY || Math.random() * dimY;
+      var x = posX || Math.random() * dimX;
       var v = _randomVec();
-      return new Asteroid([x, y], v);
+			var s = size || Asteroid.SIZES[Math.floor((Math.random() * 3))]
+      return new Asteroid([x, y], v, s);
     };
 
     function _randomVec(){

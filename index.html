@@ -6,11 +6,46 @@
 	    canvas {
 	      border: 1px solid #ccc;
 				background-image: url(http://fc01.deviantart.net/fs71/f/2012/160/b/9/stars_by_paulinemoss-d52un4e.jpg);
-/*		background: blue;*/
-				background-size: 800px 600px;
+
 				margin: 70px 200px;
 				color: #fff;
 			}
+			
+			.start-screen {
+				position: relative;
+
+			}
+			
+			.start-button {
+				position: absolute;
+				font-family: Andale Mono;
+				font-size: 24px;
+				letter-spacing: 3px;
+				color: #fff;
+				top: 450px;
+				left: 515px;
+				border: 3px solid #fff;
+				padding: 5px 15px;
+				border-radius: 100px;
+				z-axis: 1;
+			}
+			
+			.instructions {
+				position: absolute;
+				font-family: Andale Mono;
+				font-size: 14px;
+				color: #fff;
+				top: 550px;
+				left: 320px;
+				z-axis: 1;
+				width: 650px;
+			}
+			
+			
+			.hide {
+				display: none;
+			}
+			
     </style>
 
     <script src="keymaster.js"></script>
@@ -23,22 +58,43 @@
    
 </head>
 <body>
+		
+		<!-- <audio src="/Users/krishnakulkarni/Desktop/Asteroids/02 Ethereal.mp3" autoplay>
+		  Your browser does not support the <code>audio</code> element.
+		</audio> -->
+		<div id="music" class="hide"></div>
+		<div id="fire-sound" class="hide"></div>
+		<div id="collision-sound" class="hide"></div>
+		
+		
+		<div class="start-screen">
+			<div class="start-button">NEW GAME</div>
+			<div class="instructions">
+				Move with (w, a, s, d) or (up, down, left, right).
+				Fire with the space bar.
+			</div>
+		
     <canvas width="800" height="600"></canvas>
-
+		</div>
+	  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+	  </script>
+		<script src="jquery.jplayer.min.js" type="text/javascript" charset="utf-8"></script>		
+	  </script>
+						 
     <script>
         var canvas = document.getElementsByTagName("canvas")[0];
         var ctx = canvas.getContext("2d");
 
-				ctx.fillStyle = '#ccddff';
-				ctx.beginPath();
-				ctx.moveTo(50,20);
-				ctx.lineTo(200,50);
-				ctx.lineTo(127,58);
-				ctx.closePath();
-				ctx.fill();
-				ctx.strokeStyle = 'rgb(0,128,0)';
-				ctx.lineWidth = 5;
-				ctx.stroke();
+				// ctx.fillStyle = '#ccddff';
+				// ctx.beginPath();
+				// ctx.moveTo(50,20);
+				// ctx.lineTo(200,50);
+				// ctx.lineTo(127,58);
+				// ctx.closePath();
+				// ctx.fill();
+				// ctx.strokeStyle = 'rgb(0,128,0)';
+				// ctx.lineWidth = 5;
+				// ctx.stroke();
 
 
 				ctx.fillStyle = "transparent";
@@ -52,25 +108,39 @@
 				ctx.lineWidth = 1;
 				ctx.stroke(); 
 				
-				
 				ctx.fillStyle = "white";
-				ctx.font = 40+"pt Andale Mono ";
-				ctx.fillText("Asteroids", 260,100);
+				ctx.font = 60+"pt Andale Mono ";
+				ctx.fillText("Asteroids", 200,150);
 				
-        // ctx.beginPath(); // What does this do?
-        //
-        //
-        // ctx.arc(
-        //   200,
-        //   200,
-        //   20,
-        //   0, //What are all these values for???
-        //   2 * Math.PI,
-        //   false
-        // );
-        // ctx.fill();
+				
         var asteroidsGame = new Asteroids.Game(ctx);
-        asteroidsGame.start();
+				
+
+				
+				$(document).ready(function() {
+					
+					$('.start-button').on('click', function(event){
+						$('.start-button').addClass('hide');
+						$('.instructions').addClass('hide');
+					
+		        asteroidsGame.start();
+						$("#music").jPlayer("play");
+						
+					});
+					
+					
+				  $("#music").jPlayer( {
+				    ready: function () {
+				      $(this).jPlayer("setMedia", {
+				        mp3: "/Users/krishnakulkarni/Desktop/Asteroids/02 Ethereal.mp3" // Defines the mp3 url
+				      });
+				    }
+				  });
+				});
+				
     </script>
+		
+
+
 </body>
 </html>

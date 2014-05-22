@@ -25,13 +25,16 @@
      this.vel[1] += (impulse[1] * dir[1]);
    };
 	 
+   Ship.prototype.reverse = function(impulse){
+		 var dir = this.direction();
+     this.vel[0] -= (impulse[0] * dir[0]);
+     this.vel[1] -= (impulse[1] * dir[1]);
+   };
+	 
 	 Ship.prototype.decelerate = function(brake){
-		 // var dir = this.direction();
      this.vel[0] *= brake;
-		 // if(this.vel[0] < 0) this.vel[0] = 0;
      this.vel[1] *= brake;
-		 // if(this.vel[1] < 0) this.vel[1] = 0;
-	 };
+ 	 };
 
    Ship.prototype.fireBullet = function(){
 		 
